@@ -42,18 +42,14 @@ class Diary
     # to, but not over, the length that the user could read in the minutes they
     # have available given their reading speed.
     total_words_to_read = wpm * minutes
-    entries_array = @diary_entries
-
-    entries_array.each_with_index do |entry, index|
-      if entry.count_words > total_words_to_read
-        entries_array.delete[index]
+    entries_array = []
+    @diary_entries.each do |entry|
+      if entry.count_words <= total_words_to_read
+        entries_array << entry
       end
+    
     end
-
-
-    current_selection = @diary_entries[1]
-
-    @diary_entries.each { |entry| if remainder of => entry.reading_time < current_selection then current_selection = entry}
-
+    entries_array.sort_by! { |entry| entry.count_words}
+    entries_array[-1]
   end
 end

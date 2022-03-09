@@ -59,4 +59,19 @@ RSpec.describe Diary do
       expect(diary.find_best_entry_for_reading_time(20, 1)).to eq entry2
     end
   end
+
+  context "given a reading speed and time available" do
+    it "returns a suitable diary entry for reading" do
+      diary = Diary.new
+      entry1 = DiaryEntry.new("1", "My life is now crap because I have lost all my money and my friends abandonded me, isn't this terrible. My life is now crap because I have lost all my money and my friends abandonded me, isn't this terrible.")
+      entry2 = DiaryEntry.new("2", "My life is great mate.")
+      entry3 = DiaryEntry.new("3", "My life is now crap because I have lost all my money and my friends abandonded me, isn't this terrible.")
+      entry4 = DiaryEntry.new("4", "My life is super great mate.")
+      diary.add(entry1)
+      diary.add(entry2)
+      diary.add(entry3)
+      diary.add(entry4)
+      expect(diary.find_best_entry_for_reading_time(20, 1)).to eq entry3
+    end
+  end
 end
