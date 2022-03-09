@@ -8,11 +8,18 @@ class Diary
   end
 
   def all
-    @diary_entries
+    @diary_entries.map { |entry| [entry.title, entry.contents] }
   end
 
   def count_words
-    # Returns the number of words in all diary entries
+    count = 0
+    all.each do |entry|
+      entry.each do |ele|
+        count += ele.split.count
+      end
+    end
+    count
+    
   end
 
   def reading_time(wpm) # wpm is an integer representing
